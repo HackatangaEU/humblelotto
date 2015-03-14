@@ -1,12 +1,17 @@
 local conf = {
 	sailor = {
-		app_name = 'bit_lotto',
+		app_name = 'Humble Lotto',
 		default_static = nil, -- If defined, default page will be a rendered lp as defined. 
 							  -- Example: 'maintenance' will render /views/maintenance.lp
 		default_controller = 'main', 
 		default_action = 'index',
-		layout = 'default',
-		route_parameter = 'r'
+		theme = 'default',
+		layout = 'main',
+		route_parameter = 'r',
+		default_error404 = 'error/404',
+		enable_autogen = false, -- default is false, should be true only in development environment
+		friendly_urls = false,
+		max_upload = 1024 * 1024, 
 	},
 	db = {
 		driver = 'mysql',
@@ -20,6 +25,9 @@ local conf = {
 		user = '',
 		pass = '',
 		from = ''
+	},
+	debug = {
+		inspect = false
 	}
 }
 
