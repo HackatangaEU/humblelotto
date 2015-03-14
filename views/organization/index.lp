@@ -15,12 +15,12 @@
 	</tr>
 	<?lua for k,v in pairs(organizations) do ?>
 		<tr onclick="location.href='<%= sailor.make_url('organization/view',{id = v.id}) %>'" > 
-			<td> <%= v.id %> </td> 
-			<td> <%= v.name %> </td> 
-			<td> <%= v.logo_path %> </td> 
-			<td> <%= v.url %> </td> 
-			<td> <%= v.description %> </td> 
-			<td> <%= v.wallet %> </td> 
+			<td> <%= v.id or '' %> </td> 
+			<td> <%= v.name  or '' %> </td> 
+			<td> <%= v.logo_path  or '' %> </td> 
+			<td> <%= v.url  or '' %> </td> 
+			<td> <%= v.description  or '' %> </td> 
+			<td> <%= v.wallet  or '' %> </td> 
 		</tr>
 	<?lua end ?> 
 </table> 

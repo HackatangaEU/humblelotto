@@ -27,7 +27,7 @@ local conf = {
 		from = ''
 	},
 	debug = {
-		inspect = false
+		inspect = true
 	}
 }
 

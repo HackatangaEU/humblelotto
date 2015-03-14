@@ -16,13 +16,13 @@
 	</tr>
 	<?lua for k,v in pairs(draws) do ?>
 		<tr onclick="location.href='<%= sailor.make_url('draw/view',{id = v.id}) %>'" > 
-			<td> <%= v.id %> </td> 
-			<td> <%= v.date_begin %> </td> 
-			<td> <%= v.date_end %> </td> 
-			<td> <%= v.first_winner %> </td> 
-			<td> <%= v.second_winner %> </td> 
-			<td> <%= v.sum %> </td> 
-			<td> <%= v.name %> </td> 
+			<td> <%= v.id or '' %> </td> 
+			<td> <%= v.date_begin or '' %> </td> 
+			<td> <%= v.date_end or '' %> </td> 
+			<td> <%= v.first_winner or '' %> </td> 
+			<td> <%= v.second_winner or '' %> </td> 
+			<td> <%= v.sum or '' %> </td> 
+			<td> <%= v.name or '' %> </td> 
 		</tr>
 	<?lua end ?> 
 </table> 
