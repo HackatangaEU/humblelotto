@@ -22,6 +22,8 @@ M.db = {
 
 M.relations = {
 	organizations = {relation = "MANY_MANY", model = "organization", table = "org_draw", attributes = {"draw_id","organization_id"}},
+	first = {relation = "BELONGS_TO", model = "ticket", attribute = "first_winner"},
+	second = {relation = "BELONGS_TO", model = "ticket", attribute = "second_winner"},
 }
 
 return M

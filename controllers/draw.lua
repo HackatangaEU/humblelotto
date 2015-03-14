@@ -40,11 +40,8 @@ function M.view(page)
 		return 404
 	end
 
-	page:inspect(page.POST)
-	page:inspect("QQQQQ")
-	if next(page.POST) then
+	if next(page.POST) and page.POST.organizations then
 		page:inspect(page.POST)
-		page:inspect("AAAAA")
 		local org = sailor.model("organization"):find_by_attributes({name = page.POST.organizations})
 		if org then
 			local db = require "sailor.db"
@@ -66,7 +63,11 @@ function M.view(page)
 	end
 	page:inspect(orgs)
 
-	page:render('view',{draw = draw, orgs = orgs})
+	local tickets = sailor.model("ticket"):find_all("datetime>='"..draw.date_begin.."' and datetime<='"..draw.date_end.."'")
+	page:inspect(tickets)
+
+
+	page:render('view',{draw = draw, orgs = orgs, tickets=tickets})
 end
 
 function M.delete(page)
@@ -79,5 +80,30 @@ function M.delete(page)
 		page:redirect('draw/index')
 	end
 end
+
+function M.make(page)
+	page.theme = nil
+	local draw = sailor.model("draw"):find_by_id(page.GET.id)
+	if not draw then
+		return 404
+	end
+
+	local tickets = sailor.model("ticket"):find_all("datetime>='"..draw.date_begin.."' and datetime<='"..draw.date_end.."'")
+	page:inspect(tickets)
+
+	math.randomseed( os.time() )
+	math.random(#tickets)
+	local winner1 = math.random(#tickets)
+	local winner2 = math.random(#tickets)
+	while winner2 == winner1 do
+		winner2 = math.random(#tickets)
+	end
+	draw.first_winner = tickets[winner1].id
+	draw.second_winner = tickets[winner2].id
+	if draw:save() then
+		page:redirect('draw/view',{id=draw.id})
+	end
+end
+
 
 return M

@@ -19,7 +19,7 @@ M.db = {
 
 M.relations = {
 	owner = {relation = "BELONGS_TO", model = "user", attribute = "user_id"},
-	organizarion = {relation = "BELONGS_TO", model = "organization", attribute = "organization_id"},
+	organization = {relation = "BELONGS_TO", model = "organization", attribute = "organization_id"},
 }
 
 return M

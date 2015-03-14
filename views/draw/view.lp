@@ -7,8 +7,8 @@
 	<tr><td>id</td><td><%= draw.id or '' %> </td></tr> 
 	<tr><td>date_begin</td><td><%= draw.date_begin or '' %> </td></tr> 
 	<tr><td>date_end</td><td><%= draw.date_end or '' %> </td></tr> 
-	<tr><td>first_winner</td><td><%= draw.first_winner or '' %> </td></tr> 
-	<tr><td>second_winner</td><td><%= draw.second_winner or '' %> </td></tr> 
+	<tr><td>first_winner</td><td><%= draw.first.owner.wallet or '' %> - <%= draw.first.organization.name or '' %></td></tr> 
+	<tr><td>second_winner</td><td><%= draw.second.owner.wallet or '' %> - <%= draw.second.organization.name or '' %></td></tr> 
 	<tr><td>sum</td><td><%= draw.sum or '' %> </td></tr> 
 	<tr><td>name</td><td><%= draw.name or '' %> </td></tr> 
 	<tr>
@@ -21,10 +21,19 @@
 			?>
 		</td>
 	</tr> 
+	<tr>
+		<td>Tickets bought</td>
+		<td>
+			<?lua 
+				for _,t in pairs(tickets) do 
+					page:print(t.id..' - '..(t.organization.name or '')..'<br/>')
+				end
+			?>
+		</td>
+	</tr> 
 </table> 
 <br/>
-<br/>
-
+<?lua if next(orgs) then ?>
 <form method="post">
 	<input list="organizations" name="organizations"/>
 
@@ -38,8 +47,9 @@
 	<input type="submit" class="btn-xs btn-primary" value="Add Organization"/>
 </form>
 </br></br>
-
-
+<?lua end ?>
+<a class="btn-xs btn-primary" href="<%= sailor.make_url('draw/make',{id=draw.id}) %>">Make draw</a>
+</br></br>
 <a href="<%= sailor.make_url('draw/index') %>"><- Back to View All</a>
 
 
