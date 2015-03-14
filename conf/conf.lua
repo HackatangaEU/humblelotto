@@ -9,16 +9,16 @@ local conf = {
 		layout = 'main',
 		route_parameter = 'r',
 		default_error404 = 'error/404',
-		enable_autogen = false, -- default is false, should be true only in development environment
+		enable_autogen = true, -- default is false, should be true only in development environment
 		friendly_urls = false,
 		max_upload = 1024 * 1024, 
 	},
 	db = {
 		driver = 'mysql',
-		host = '',
-		user = '',
-		pass = '',
-		dbname = ''
+		host = 'localhost',
+		user = 'root',
+		pass = '1234',
+		dbname = 'humblelotto'
 	},
 	smtp = {
 		server = '',
