@@ -1,0 +1,5 @@
+LuaPackagePath "/usr/local/share/lua/5.1/?.lua"
+<FilesMatch "\.lua$">
+	AddHandler lua-script .lua
+</FilesMatch>
+DirectoryIndex index.lua
