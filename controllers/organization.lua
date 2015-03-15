@@ -63,6 +63,17 @@ function M.getList(page)
 	page:write(cjson.encode(orgs))
 end
 
+function M.show(page)
+	page.theme = nil
+	if page.POST.id then
+		local org = sailor.model('organization'):find_by_id(page.POST.id)
+		if org then
+			unfunction(org)
+			page:write(cjson.encode(org))
+		end
+	end
+end
+
 function M.delete(page)
 	local organization = sailor.model("organization"):find_by_id(page.GET.id)
 	if not organization then
