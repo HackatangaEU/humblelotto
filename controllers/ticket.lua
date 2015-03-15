@@ -18,6 +18,11 @@ function M.create(page)
 	page:render('create',{ticket = ticket, saved = saved})
 end
 
+function M.new(page)
+
+	page:render('new')
+end
+
 function M.update(page)
 	local ticket = sailor.model("ticket"):find_by_id(page.GET.id)
 	if not ticket then

@@ -1,5 +1,6 @@
 local M = {}
 
+local json = require "lua-cjson"
 function M.index(page)
 	local draws = sailor.model("draw"):find_all()
 	page:render('index',{draws = draws})
@@ -17,6 +18,8 @@ function M.create(page)
 	end
 	page:render('create',{draw = draw, saved = saved})
 end
+
+
 
 function M.update(page)
 	local draw = sailor.model("draw"):find_by_id(page.GET.id)
