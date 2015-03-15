@@ -1,4 +1,5 @@
 local M = {}
+local a = require "sailor.access"
 
 function M.index(page)
 	local tickets = sailor.model("ticket"):find_all()
@@ -6,6 +7,7 @@ function M.index(page)
 end
 
 function M.create(page)
+	if a.is_guest() then return 404 end
 	local ticket = sailor.model("ticket"):new()
 	local saved
 	if next(page.POST) then
@@ -24,6 +26,7 @@ function M.new(page)
 end
 
 function M.update(page)
+	if a.is_guest() then return 404 end
 	local ticket = sailor.model("ticket"):find_by_id(page.GET.id)
 	if not ticket then
 		return 404
@@ -48,6 +51,7 @@ function M.view(page)
 end
 
 function M.delete(page)
+	if a.is_guest() then return 404 end
 	local ticket = sailor.model("ticket"):find_by_id(page.GET.id)
 	if not ticket then
 		return 404

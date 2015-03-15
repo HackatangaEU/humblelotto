@@ -1,6 +1,6 @@
 local M = {}
 local cjson = require "cjson"
-
+local a = require "sailor.access"
 local function unfunction(obj)
 	for k,v in pairs(obj) do 
 		if type(v) == 'function' then
@@ -17,6 +17,7 @@ function M.index(page)
 end
 
 function M.create(page)
+	if a.is_guest() then return 404 end
 	local organization = sailor.model("organization"):new()
 	local saved
 	if next(page.POST) then
@@ -30,6 +31,7 @@ function M.create(page)
 end
 
 function M.update(page)
+	if a.is_guest() then return 404 end
 	local organization = sailor.model("organization"):find_by_id(page.GET.id)
 	if not organization then
 		return 404
@@ -75,6 +77,7 @@ function M.show(page)
 end
 
 function M.delete(page)
+	if a.is_guest() then return 404 end
 	local organization = sailor.model("organization"):find_by_id(page.GET.id)
 	if not organization then
 		return 404
