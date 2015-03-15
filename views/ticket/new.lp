@@ -47,3 +47,6 @@
 	<input type="hidden" name="transactionJSON" value='<%= cjson.encode(test) %>'/>
 	<input type="submit"/>
 </form>
+
+
+?>
