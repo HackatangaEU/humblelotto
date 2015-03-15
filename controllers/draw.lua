@@ -1,6 +1,16 @@
 local M = {}
+local cjson = require "cjson"
 
-local json = require "lua-cjson"
+local function unfunction(obj)
+	for k,v in pairs(obj) do 
+		if type(v) == 'function' then
+			obj[k] = nil
+		elseif type(v) == 'table' then
+			unfunction(v)
+		end
+	end
+end
+
 function M.index(page)
 	local draws = sailor.model("draw"):find_all()
 	page:render('index',{draws = draws})
@@ -82,6 +92,15 @@ function M.delete(page)
 	if draw:delete() then
 		page:redirect('draw/index')
 	end
+end
+
+function M.getCurrent(page)
+	page.theme = nil
+	page.r.headers_out['Access-Control-Allow-Origin']='*';
+	local date = os.date("%Y-%m-%d %H:%M:%S")
+	local draw = sailor.model('draw'):find("date_begin <= '" .. date .. "' AND date_end >= '" .. date .. "'")
+	unfunction(draw)
+	page:write(cjson.encode(draw))
 end
 
 function M.make(page)
